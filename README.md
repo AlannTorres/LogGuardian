@@ -80,7 +80,6 @@ O **LogGuardian** é uma ferramenta de análise de logs de acesso web que utiliz
 
 5. Acesse os resultados:
    - Relatório completo: `output/analysis_report.md`
-   - Dados processados: `output/analysis_results.json`
    - Visualizações: `output/plots/`
 
 ## 📊 Resultados Esperados
