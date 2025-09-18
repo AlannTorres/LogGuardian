@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[project]
+name = "logguardian"
+version = "0.1.0"
+description = "Framework de análise e normalização de logs"
+authors = [{ name = "Alan Torres", email = "alanvictor.torres@gmail.com" }]
+
+dependencies = [
+    "pandas>=1.3",
+    "numpy>=1.21",
+    "matplotlib>=3.4",
+    "seaborn>=0.11",
+    "anonymizeip",
+    "kagglehub" # se realmente for usada
+]
+
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Information Technology",
+    "Topic :: Security",
+    "Topic :: System :: Logging",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+]
+
+keywords = ["logs", "analysis", "security", "traefik", "framework"]
+
+[project.urls]
+"Homepage" = "https://github.com/AlannTorres/LogGuardian"
+
+[project.scripts]
+loguard = "logguardian.cli:main"

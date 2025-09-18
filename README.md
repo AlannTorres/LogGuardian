@@ -1,104 +1,154 @@
-# LogGuardian - Detecção Automática de Requisições Suspeitas
+# LogGuardian
 
-![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
-![License](https://img.shields.io/badge/License-MIT-green)
-![Research](https://img.shields.io/badge/Research-PIBIC%2FUFRPE-orange)
+<p align="center">
+  <img src="./assets/logo.png" alt="LogGuardian Logo" width="280"/>
+</p>
+
+<p align="center">
+  <b>Framework de Análise e Normalização de Logs</b>  
+</p>
+
+<p align="center">
+  <a href="https://www.python.org/">
+    <img src="https://img.shields.io/badge/Python-3.8%2B-blue.svg" alt="Python">
+  </a>
+  <a href="./LICENSE">
+    <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License">
+  </a>
+  <a href="https://pypi.org/project/logguardian/">
+    <img src="https://img.shields.io/badge/status-stable-success.svg" alt="Status">
+  </a>
+</p>
+
+---
 
 ## 📌 Visão Geral
 
-O **LogGuardian** é uma ferramenta de análise de logs de acesso web que utiliza técnicas de aprendizado de máquina para identificar padrões suspeitos e anomalias em requisições HTTP. Desenvolvido como parte de um projeto de pesquisa PIBIC na UFRPE, este sistema automatiza a detecção de atividades maliciosas em logs de servidores, substituindo a análise manual por uma abordagem baseada em dados.
+O **LogGuardian** é um framework em Python que transforma **logs crus de servidores web** (ex.: Traefik, Nginx, Apache) em **relatórios estruturados e ricos em insights**.  
 
-## 🎯 Objetivos do Projeto
+Ele permite desde a **normalização de arquivos `.log` para `.csv`**, até a **análise estatística e detecção de anomalias**, gerando relatórios em **Markdown** prontos para documentação ou auditorias.
 
-1. Automatizar a identificação de requisições maliciosas em logs web
-2. Desenvolver técnicas para detecção de anomalias baseadas em comportamento
-3. Comparar a eficácia da abordagem com métodos tradicionais e diferentes estudos
-4. Investigar relações entre anomalias em diferentes logs para identificar ataques coordenados
+---
 
-## ⚙️ Funcionalidades Principais
+## ⚙️ Funcionalidades
 
-- **Análise Estatística Completa**:
-  - Distribuição de códigos de status HTTP
-  - Padrões temporais (hora/dia/semana)
-  - Recursos mais e menos acessados
-  - Análise detalhada de erros 404
-  
-- **Detecção de Anomalias**:
-  - Identificação de métodos HTTP incomuns
-  - Detecção de padrões de injeção (SQL, XSS)
-  - URLs excessivamente longas
-  - Extensões de arquivo suspeitas
-  - IPs com múltiplos erros 404
-  - Respostas com tamanho anormal
+✅ **Normalização de Logs**: converte `.log` → `.csv`  
+✅ **Análise de Segurança**: identifica padrões suspeitos, erros críticos e anomalias  
+✅ **Relatórios Profissionais**: exportação em Markdown com gráficos  
+✅ **Visualizações**: gráficos de distribuição, séries temporais e heatmaps  
+✅ **Cache de IPs**: resolve geolocalização e mantém cache local em JSON  
 
-- **Visualização de Dados**:
-  - Gráficos interativos de distribuição
-  - Heatmaps hora/método
-  - Visualização de tendências temporais
+---
 
-## 🛠️ Tecnologias Utilizadas
+## 📦 Instalação
 
-- **Linguagem**: Python 3.8+
-- **Bibliotecas Principais**:
-  - Pandas (manipulação de dados)
-  - Matplotlib/Seaborn (visualização)
-  - Scikit-learn (modelos de ML)
-  - Kagglehub (acesso a datasets)
-- **Frameworks**: Jupyter Notebooks (análise exploratória)
-- **Formato de Saída**: JSON, Markdown, PNG (gráficos)
+### 🔹 Opção 1 — Usando [Poetry](https://python-poetry.org/) (recomendado)
 
-## 📥 Instalação e Execução
+```bash
+git clone https://github.com/seu-usuario/LogGuardian.git
+cd LogGuardian
+poetry install
+```
 
-### Pré-requisitos
-- Python 3.8
-- Gerenciador de pacotes pip
+Ative o ambiente:
+```bash
+poetry shell
+```
 
-### Passo a Passo
+### 🔹 Opção 2 — Via `pip`
 
-1. Clone o repositório:
-   ```bash
-   git clone https://github.com/seu-usuario/LogGuardian.git
-   cd LogGuardian
-   ```
+```bash
+pip install .
+```
 
-2. Crie um ambiente virtual (opcional mas recomendado):
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # Linux/Mac
-   venv\Scripts\activate     # Windows
-   ```
+---
 
-3. Instale as dependências:
-   ```bash
-   pip install -r requirements.txt
-   ```
+## 🚀 Uso via CLI
 
-4. Execute a análise principal:
-   ```bash
-   python main.py
-   ```
+Após instalar, o comando disponível será **`loguard`**.
 
-5. Acesse os resultados:
-   - Relatório completo: `output/analysis_report.md`
-   - Visualizações: `output/plots/`
+### 📖 Ajuda
 
-## 📊 Resultados Esperados
+```bash
+loguard -h
 
-A ferramenta gera relatórios abrangentes que incluem:
+Framework de análise de logs Traefik
 
-1. Estatísticas gerais de acesso
-2. Distribuição temporal das requisições
-3. Identificação de recursos problemáticos
-4. Detecção de padrões anômalos
-5. Visualizações profissionais prontas para publicação
+Comandos disponíveis:
+    normalize <src = file.log> <out = file.csv> : Normaliza logs crus (.log) em CSV
+    analyze   <src = file.csv>                  : Executa análise em CSV normalizado
+    process   <src = file.log> <out = file.csv> : Executa normalização e análise em sequência
+```
+
+### 🔹 Exemplos de uso
+
+**1. Normalizar um log cru em CSV**
+```bash
+loguard normalize access.log traefik.csv
+```
+
+**2. Analisar um CSV já normalizado**
+```bash
+loguard analyze traefik.csv
+```
+
+**3. Fazer tudo em sequência (normalize + analyze)**
+```bash
+loguard process access.log traefik.csv
+```
+
+📄 O relatório final será salvo em:
+```
+output/analysis_report.md
+output/plots/
+```
+
+---
+
+## 📂 Estrutura do Projeto
+
+```
+LogGuardian/
+├── src/logguardian/        # Código-fonte principal
+│   ├── cli.py              # CLI principal
+│   ├── analysis.py         # Módulo de análise
+│   ├── normalizer.py       # Normalização de logs
+│   ├── report_generator.py # Geração de relatórios
+│   └── main.py             # Ponto de entrada
+├── output/                 # Saída de relatórios e gráficos
+│   ├── analysis_report.md
+│   ├── plots/
+│   └── ip_geolocation_cache.json
+├── pyproject.toml          # Configuração do Poetry
+├── requirements.txt        # Dependências
+├── README.md               # Documentação
+└── LICENSE                 # Licença
+```
+
+---
+
+## 🛠️ Tecnologias
+
+- [Python 3.8+](https://www.python.org/)  
+- [Pandas](https://pandas.pydata.org/) — manipulação de dados  
+- [Matplotlib](https://matplotlib.org/) / [Seaborn](https://seaborn.pydata.org/) — gráficos e visualizações  
+- [argparse](https://docs.python.org/3/library/argparse.html) — CLI  
+
+---
 
 ## 📜 Licença
 
-Distribuído sob a licença MIT. Veja `LICENSE` para mais informações.
+Distribuído sob a licença **MIT**.  
+Veja o arquivo [LICENSE](./LICENSE) para mais detalhes.
+
+---
 
 ## 🌐 Contato
 
-**Pesquisador Responsável**: Alan Torres
-**Orientador Responsável**: Rafael Perazzo
-**Instituição**: Universidade Federal Rural de Pernambuco (UFRPE)  
-**Programa**: PIBIC/CNPq  
+👤 **Alan Torres**  
+📧 alan.vstorres@ufrpe.br 
+Orientador Responsável: **Rafael Perazzo**
+🏫 Universidade Federal Rural de Pernambuco (UFRPE)  
+🔗 [LinkedIn](https://www.linkedin.com/alanntorres) | [GitHub](https://github.com/alanntorres)
+
+---
