@@ -33,7 +33,7 @@ Ele permite desde a **normalização de arquivos `.log` para `.csv`**, até a **
 ## ⚙️ Funcionalidades
 
 ✅ **Normalização de Logs**: converte `.log` → `.csv`  
-✅ **Análise de Segurança**: identifica padrões suspeitos, erros críticos e anomalias  
+✅ **Análise de Segurança**: identifica padrões suspeitos e anomalias  
 ✅ **Relatórios Profissionais**: exportação em Markdown com gráficos  
 ✅ **Visualizações**: gráficos de distribuição, séries temporais e heatmaps  
 ✅ **Cache de IPs**: resolve geolocalização e mantém cache local em JSON  
@@ -42,7 +42,7 @@ Ele permite desde a **normalização de arquivos `.log` para `.csv`**, até a **
 
 ## 📦 Instalação
 
-### 🔹 Opção 1 — Usando [Poetry](https://python-poetry.org/) (recomendado)
+### 🔹 Opção 1 — Usando [Poetry](https://python-poetry.org/)
 
 ```bash
 git clone https://github.com/seu-usuario/LogGuardian.git
@@ -56,6 +56,13 @@ poetry shell
 ```
 
 ### 🔹 Opção 2 — Via `pip`
+
+```bash
+git clone https://github.com/seu-usuario/LogGuardian.git
+cd LogGuardian
+python3 -m venv .venv
+source .venv/bin/activate
+```
 
 ```bash
 pip install .
